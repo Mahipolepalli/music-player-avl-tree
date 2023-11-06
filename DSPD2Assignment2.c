@@ -304,9 +304,9 @@ void  Display(TreeNode* root)
 /* 
 		 r                              x
 		/ \      rotate right         /   \
-	  x   T3   -------------->      T1    r
-	 / \	     <--------------           / \
-	T1 T2       rotate left             T2  T3
+	       x   T3   -------------->      T1    r
+	      / \	<--------------           / \
+	     T1 T2       rotate left             T2  T3
 */
 
 TreeNode* RightRotate(TreeNode* root)
@@ -319,15 +319,15 @@ TreeNode* RightRotate(TreeNode* root)
       TreeNode* x = r->left;
       r->left = x->right;
       x->right = r;
-      int temp = x->right_height;
-      r->left_height = x->right_height;
-      if(r->right_height > temp)
+      int t2 = x->right_height;
+      int t3=r->right_height;
+      if(t2>t3)
       {
-         x->right_height = r->right_height+1;
+          x->right_height=t2+1;
       }
       else
       {
-         x->right_height++;
+	  x->right_height=t3+1;
       }
       root = x;
    }
@@ -345,16 +345,16 @@ TreeNode* LeftRotate(TreeNode* root)
        TreeNode* r= x->right;
        x->right = r->left;
        r->left = x;
-       int temp = x->left_height;
-       x->right_height = r->left_height;
-       if(temp > r->left_height)
-       {
-         r->left_height = x->left_height + 1;
-       }
-       else
-       {
-         r->left_height++;
-       }
+       int t1 = x->left_height;
+       int t3=r->right_height;
+       if(t1>t3)
+      {
+          x->left_height=t1+1;
+      }
+      else
+      {
+	  x->left_height=t3+1;
+      }
        root = r;
      }
    }
